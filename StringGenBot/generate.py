@@ -31,10 +31,7 @@ buttons_ques = [
     [
         InlineKeyboardButton("ᴛᴇʟᴇᴛʜᴏɴ", callback_data="telethon"),
     ],
-gen_button = [
-    [
-        InlineKeyboardButton(text="ɢᴇɴᴇʀᴀᴛᴇ sᴇssɪᴏɴ", callback_data="generate")
-    ]
+
 ]
 
 
@@ -142,7 +139,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             string_session = client.session.save()
         else:
             string_session = await client.export_session_string()
-        await phone_code_msg.reply("<b>Berhasil Membuat {} String Session</b>\n\n<code>{}</code>\n\n<b>Owner:</b> @Ammuyeee".format("telethon" if telethon else "pyrogram", string_session))
+        await phone_code_msg.reply("<b>Berhasil Membuat {} String Session</b>\n\n<code>{}</code>\n\n<b>Support:</b> @Nyeghhh".format("telethon" if telethon else "pyrogram", string_session))
         await client.disconnect()
 
 
