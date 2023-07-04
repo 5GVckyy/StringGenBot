@@ -64,7 +64,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
    #     return
         #try:
   #  api_hash_msg = await bot.ask(user_id, "» Silahkan masukkan  **API_HASH** kalian", filters=filters.text)
-            api_id = int(api_id_msg.text)
+          #  api_id = int(api_id_msg.text)
     if await cancelled(api_hash_msg):
 #        except ValueError:
       #  return
