@@ -18,7 +18,7 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
                 await callback_query.answer()
                 await generate_session(bot, callback_query.message)
             elif query == "pyrogram_bot":
-                await callback_query.answer("» ᴛʜᴇ sᴇssɪᴏɴ ɢᴇɴᴇʀᴀᴛᴇᴅ ᴡɪʟʟ ʙᴇ ᴏғ ᴩʏʀᴏɢʀᴀᴍ ᴠ2.", show_alert=True)
+                await callback_query.answer("String menghasilkan akan menjadi Pyrogram V2.", show_alert=True)
                 await generate_session(bot, callback_query.message, is_bot=True)
             elif query == "telethon_bot":
                 await callback_query.answer()
@@ -32,7 +32,7 @@ async def _callbacks(bot: Client, callback_query: CallbackQuery):
             await callback_query.message.reply(ERROR_MESSAGE.format(str(e)))
 
 
-ERROR_MESSAGE = "ᴡᴛғ ! sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ. \n\n**ᴇʀʀᴏʀ** : {} " \
-            "\n\n**ᴩʟᴇᴀsᴇ ғᴏʀᴡᴀʀᴅ ᴛʜɪs ᴍᴇssᴀɢᴇ ᴛᴏ @DevilsHeavenMF**, ɪғ ᴛʜɪs ᴍᴇssᴀɢᴇ " \
-            "ᴅᴏᴇsɴ'ᴛ ᴄᴏɴᴛᴀɪɴ ᴀɴʏ sᴇɴsɪᴛɪᴠᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ " \
-            "ʙᴇᴄᴀᴜsᴇ ᴛʜɪs ᴇʀʀᴏʀ ɪs **ɴᴏᴛ ʟᴏɢɢᴇᴅ ʙʏ ᴛʜᴇ ʙᴏᴛ** !"
+ERROR_MESSAGE = "Ada sesuatu kesalahan yang terjadi. \n\n**Error** : {} " \
+            "\n\n**Silahkan forward pesan ini kepada @Ammuyeee**, kalau pesan ini " \
+            "tidak mengandung informasi sensitif apa pun" \
+            "karena kesalahan ini **tidak dicatat oleh bot** !"
