@@ -2,7 +2,6 @@ from data import Data
 from pyrogram.types import Message
 from telethon import TelegramClient
 from pyrogram import Client, filters
-from env import API_ID, API_HASH
 from asyncio.exceptions import TimeoutError
 from telethon.sessions import StringSession
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -27,10 +26,8 @@ from telethon.errors import (
 ask_ques = "**» Silahkan Tekan String Mana Yang Ingin Kamu Ambil:**"
 buttons_ques = [
     [
-        InlineKeyboardButton("ᴩʏʀᴏɢʀᴀᴍ v2", callback_data="pyrogram"),
-    ],
-    [
-        InlineKeyboardButton("ᴛᴇʟᴇᴛʜᴏɴ", callback_data="telethon"),
+        InlineKeyboardButton("Pyrogram V2", callback_data="pyrogram"),
+        InlineKeyboardButton("Telethon", callback_data="telethon"),
     ],
 
 ]
@@ -44,37 +41,25 @@ async def main(_, msg):
 
 async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: bool = False, is_bot: bool = False):
     if telethon:
-        ty = "ᴛᴇʟᴇᴛʜᴏɴ"
+        ty = "Telethon"
     else:
-        ty = "ᴩʏʀᴏɢʀᴀᴍ"
+        ty = "Pyrogram"
     if is_bot:
         ty += " ʙᴏᴛ"
-    await msg.reply(f"» Mencoba memulai  **{ty}** generator session ...")
+    await msg.reply(f"» Memulai  **{ty}** generator session ...")
     user_id = msg.chat.id
-    api_id_msg = await bot.ask(user_id, "» Memulai proses generating string...\n\nSilahkan masukan **API_ID** kalian, jika menggunakan tgbot silahkan tekan /skip ", filters=filters.text)
+    api_id_msg = await bot.ask(user_id, "» Memulai proses generating string...\n\nSilahkan masukan **API_ID** kalian.", filters=filters.text)
     if await cancelled(api_id_msg):
         return
-    if api_id_msg.text == "/skip":
+    try:
         api_id = int(api_id_msg.text)
-        api_id = env.API_ID
- #   except ValueError:
-        api_hash = env.API_HASH
-      #  await api_id_msg.reply("**API_ID** kalian salah, silahkan ulang kembali.", quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
- #   else:
-   #     return
-        #try:
-  #  api_hash_msg = await bot.ask(user_id, "» Silahkan masukkan  **API_HASH** kalian", filters=filters.text)
-          #  api_id = int(api_id_msg.text)
+    except ValueError:
+        await api_id_msg.reply("**API_ID** kalian salah, silahkan ulang kembali.", quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+        return
+    api_hash_msg = await bot.ask(user_id, "» Silahkan masukkan  **API_HASH** kalian", filters=filters.text)
     if await cancelled(api_hash_msg):
-#        except ValueError:
-      #  return
-          #  await api_id_msg.reply("**ᴀᴩɪ_ɪᴅ** ᴍᴜsᴛ ʙᴇ ᴀɴ ɪɴᴛᴇɢᴇʀ, sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
+        return
     api_hash = api_hash_msg.text
-            return
-        api_hash_msg = await msg.chat.ask("» ɴᴏᴡ ᴩʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ **ᴀᴩɪ_ʜᴀsʜ** ᴛᴏ ᴄᴏɴᴛɪɴᴜᴇ", filters=filters.text)
-        if await cancelled(api_hash_msg):
-            return
-        api_hash = api_hash_msg.text
     if not is_bot:
         t = "» Silahkan masukan **NOMOR_TELEPON** kalian dengan awalan (+) \nContoh : `+62812345678`'"
     else:
@@ -84,9 +69,9 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
         return
     phone_number = phone_number_msg.text
     if not is_bot:
-        await msg.reply("» Mencoba mengirim otp di nomor yang diberikan...")
+        await msg.reply("» Mengirim otp di nomor yang diberikan...")
     else:
-        await msg.reply("» ᴛʀʏɪɴɢ ᴛᴏ ʟᴏɢɪɴ ᴠɪᴀ ʙᴏᴛ ᴛᴏᴋᴇɴ...")
+        await msg.reply("» Login Via Bot Token...")
     if telethon and is_bot:
         client = TelegramClient(StringSession(), api_id, api_hash)
     elif telethon:
@@ -152,7 +137,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
             string_session = client.session.save()
         else:
             string_session = await client.export_session_string()
-        await phone_code_msg.reply("<b>Berhasil Membuat {} String Session</b>\n\n<code>{}</code>\n\n<b>Support:</b> @Nyeghhh".format("telethon" if telethon else "pyrogram", string_session))
+        await phone_code_msg.reply("<b>Berhasil Membuat {} String Session</b>\n\n<code>{}</code>\n\n<b>Owner:</b> @Ammuyeee".format("telethon" if telethon else "pyrogram", string_session))
         await client.disconnect()
 
 
@@ -163,8 +148,6 @@ async def cancelled(msg):
     elif "/restart" in msg.text:
         await msg.reply("**» Memulai Ulang Bot !**", quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
         return True
-    elif "/skip" in msg.text:
-        return False
     elif msg.text.startswith("/"):  # Bot Commands
         await msg.reply("**» Membatalkan generation process!**", quote=True)
         return True
