@@ -57,7 +57,7 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     if api_id_msg.text == "/skip":
         api_id = int(api_id_msg.text)
         api_id = env.API_ID
-    except ValueError:
+ #   except ValueError:
         api_hash = env.API_HASH
         await api_id_msg.reply("**API_ID** kalian salah, silahkan ulang kembali.", quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
  #   else:
