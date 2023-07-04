@@ -1,7 +1,7 @@
 {
-  "name": "sᴇssɪᴏɴ ɢᴇɴᴇʀᴀᴛᴏʀ",
-  "description": "A Telegram Bot to generate Telethon and Pyrogram String Session.",
-  "logo": "https://telegra.ph/file/654ddaf472f18b799600b.jpg",
+  "name": "String Generator",
+  "description": "A Telegram Bot to generate Telethon and Pyrogram String Sessions.",
+  "stack": "heroku-22",
   "keywords": [
     "telegram",
     "bot",
@@ -11,8 +11,27 @@
     "buildpacks": [{
     "url": "heroku/python"
   }],
-  "repository": "https://github.com/AnonymousX1025/StringGenBot",
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "addons": [
+      {
+         "options": {
+            "version": "12"
+         },
+         "plan": "heroku-postgresql"
+      }
+   ],
+  "repository": "https://github.com/5GVckyy/StringGenBot",
   "env": {
+    "ENVIRONMENT": {
+      "description": "Don't change ANYTHING.",
+      "required": true,
+      "value": "ANYTHING"
+    },
     "API_ID": {
       "description": "Get this value from my.telegram.org/apps.",
       "required": true,
@@ -25,11 +44,6 @@
     },
     "OWNER_ID": {
       "description": "Telegram id of the person who will known as owner of the bot.",
-      "required": true,
-      "value": ""
-    },
-    "MONGO_DB_URI": {
-      "description": "Get this value from cloud.mongodb.com",
       "required": true,
       "value": ""
     },
