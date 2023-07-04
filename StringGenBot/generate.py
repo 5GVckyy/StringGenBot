@@ -50,18 +50,30 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
         ty += " ʙᴏᴛ"
     await msg.reply(f"» Mencoba memulai  **{ty}** generator session ...")
     user_id = msg.chat.id
-    api_id_msg = await bot.ask(user_id, "» Memulai proses generating string...\n\nSilahkan masukan **API_ID** kalian.", filters=filters.text)
+    api_id_msg = await bot.ask(user_id, "» Memulai proses generating string...\n\nSilahkan masukan **API_ID** kalian, jika menggunakan tgbot silahkan tekan /skip ", filters=filters.text)
     if await cancelled(api_id_msg):
         return
-    try:
+    if api_id_msg.text == "/skip":
         api_id = int(api_id_msg.text)
+        api_id = config.API_ID
     except ValueError:
+        api_hash = config.API_HASH
         await api_id_msg.reply("**API_ID** kalian salah, silahkan ulang kembali.", quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
+    else:
         return
+        try:
     api_hash_msg = await bot.ask(user_id, "» Silahkan masukkan  **API_HASH** kalian", filters=filters.text)
+            api_id = int(api_id_msg.text)
     if await cancelled(api_hash_msg):
+        except ValueError:
         return
+            await api_id_msg.reply("**ᴀᴩɪ_ɪᴅ** ᴍᴜsᴛ ʙᴇ ᴀɴ ɪɴᴛᴇɢᴇʀ, sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
     api_hash = api_hash_msg.text
+            return
+        api_hash_msg = await msg.chat.ask("» ɴᴏᴡ ᴩʟᴇᴀsᴇ sᴇɴᴅ ʏᴏᴜʀ **ᴀᴩɪ_ʜᴀsʜ** ᴛᴏ ᴄᴏɴᴛɪɴᴜᴇ", filters=filters.text)
+        if await cancelled(api_hash_msg):
+            return
+        api_hash = api_hash_msg.text
     if not is_bot:
         t = "» Silahkan masukan **NOMOR_TELEPON** kalian dengan awalan (+) \nContoh : `+62812345678`'"
     else:
