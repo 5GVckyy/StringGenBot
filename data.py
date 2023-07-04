@@ -14,10 +14,13 @@ class Data:
     ]
 
     START = """
-**Hey** {},
-
-**This is** {},
-**Bot untuk Mengambil String Session!**
-
-**Made With By:** [Piki](https://t.me/Ammuyeee)
+**Halo** {},
+━━━━━━━━━━━━━━━━━━━━━━━━
+{} di buat untuk Membantu anda Untuk Mengambil String Session Telegram dengan Mudah dan AMAN
+━━━━━━━━━━━━━━━━━━━━━━━━
+Jika anda Tidak Mempercayai Bot ini:
+1. Jangan dibaca Pesan ini
+2. Hapus Pesan dan Blokir Bot ini
+━━━━━━━━━━━━━━━━━━━━━━━━
+**Managed With By:** @Ammuyeee
     """
