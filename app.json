@@ -45,7 +45,7 @@
     "OWNER_ID": {
       "description": "Telegram id of the person who will known as owner of the bot.",
       "required": true,
-      "value": ""
+      "value": "1843616228"
     },
     "BOT_TOKEN": {
       "description": "Get this value from @BotFather",
