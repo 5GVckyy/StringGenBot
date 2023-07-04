@@ -60,13 +60,13 @@ async def generate_session(bot: Client, msg: Message, telethon=False, old_pyro: 
     except ValueError:
         api_hash = env.API_HASH
         await api_id_msg.reply("**API_ID** kalian salah, silahkan ulang kembali.", quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
-    else:
-        return
+ #   else:
+   #     return
         try:
     api_hash_msg = await bot.ask(user_id, "» Silahkan masukkan  **API_HASH** kalian", filters=filters.text)
             api_id = int(api_id_msg.text)
     if await cancelled(api_hash_msg):
-        except ValueError:
+#        except ValueError:
         return
             await api_id_msg.reply("**ᴀᴩɪ_ɪᴅ** ᴍᴜsᴛ ʙᴇ ᴀɴ ɪɴᴛᴇɢᴇʀ, sᴛᴀʀᴛ ɢᴇɴᴇʀᴀᴛɪɴɢ ʏᴏᴜʀ sᴇssɪᴏɴ ᴀɢᴀɪɴ.", quote=True, reply_markup=InlineKeyboardMarkup(gen_button))
     api_hash = api_hash_msg.text
