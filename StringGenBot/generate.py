@@ -163,6 +163,8 @@ async def cancelled(msg):
     elif "/restart" in msg.text:
         await msg.reply("**» Memulai Ulang Bot !**", quote=True, reply_markup=InlineKeyboardMarkup(Data.generate_button))
         return True
+    elif "/skip" in msg.text:
+        return False
     elif msg.text.startswith("/"):  # Bot Commands
         await msg.reply("**» Membatalkan generation process!**", quote=True)
         return True
